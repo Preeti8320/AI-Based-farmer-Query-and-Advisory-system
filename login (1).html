@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ml" translate="no">
+<head>
+<meta charset="UTF-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Krishi Mitra</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+    --primary-color: #4caf50;
+    --secondary-color: #388e3c;
+    --text-dark: #333;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body {
+    background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1920&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.login-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 400px;
+    z-index: 2;
+    text-align: center;
+}
+
+.logo-area {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.logo-area span { color: var(--secondary-color); }
+
+.input-group { margin-bottom: 20px; text-align: left; }
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.input-wrapper { position: relative; }
+
+.input-wrapper i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+select {
+    width:100%;
+    padding:10px;
+    border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-card">
+    <div class="logo-area">
+        <i class="fa-solid fa-seedling"></i>
+        <span id="appName">കൃഷി മിത്ര</span>
+    </div>
+
+    <h2 id="title">തിരികെ സ്വാഗതം</h2>
+    <p id="subtitle">നിങ്ങളുടെ അക്കൗണ്ടിൽ ലോഗിൻ ചെയ്യുക</p>
+
+    <div class="input-group">
+        <label id="langLabel">ഭാഷ തിരഞ്ഞെടുക്കുക</label>
+        <select id="languageSelect">
+            <option value="ml" selected>മലയാളം</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+
+    <form onsubmit="loginUser(event)">
+        <div class="input-group">
+            <label id="lblPhone">ഫോൺ നമ്പർ</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-phone"></i>
+                <input id="phone" required>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label id="lblPass">പാസ്‌വേഡ്</label>
+            <div class="input-wrapper">
+                <i class="fa-solid fa-lock"></i>
+                <input id="password" type="password" required>
+            </div>
+        </div>
+
+        <a href ="index.html" type="submit" class="btn-login" id="btnLogin">ലോഗിൻ</a>
+    </form>
+
+    <p style="margin-top:15px;">
+        <span id="noAcc">അക്കൗണ്ട് ഇല്ലേ?</span>
+        <a href="register.html" id="signupText" style="color:var(--primary-color);font-weight:600;">സൈൻ അപ്പ്</a>
+    </p>
+</div>
+
+<!-- ---------- LANGUAGE SCRIPT ---------- -->
+<script>
+const text = {
+ml:{
+app:"കൃഷി മിത്ര",
+title:"തിരികെ സ്വാഗതം",
+sub:"നിങ്ങളുടെ അക്കൗണ്ടിൽ ലോഗിൻ ചെയ്യുക",
+lang:"ഭാഷ തിരഞ്ഞെടുക്കുക",
+phone:"ഫോൺ നമ്പർ",
+pass:"പാസ്‌വേഡ്",
+phonePh:"നിങ്ങളുടെ ഫോൺ നമ്പർ നൽകുക",
+passPh:"പാസ്‌വേഡ് നൽകുക",
+login:"ലോഗിൻ",
+noAcc:"അക്കൗണ്ട് ഇല്ലേ?",
+signup:"സൈൻ അപ്പ്"
+},
+en:{
+app:"KRISHI MITRA",
+title:"Welcome Back",
+sub:"Please login to your account",
+lang:"Language",
+phone:"Phone Number",
+pass:"Password",
+phonePh:"Enter your registered number",
+passPh:"Enter your password",
+login:"Login",
+noAcc:"Don't have an account?",
+signup:"Sign Up"
+}
+};
+
+function applyLang() {
+    const t = text[languageSelect.value];
+    appName.innerText = t.app;
+    title.innerText = t.title;
+    subtitle.innerText = t.sub;
+    langLabel.innerText = t.lang;
+    lblPhone.innerText = t.phone;
+    lblPass.innerText = t.pass;
+    phone.placeholder = t.phonePh;
+    password.placeholder = t.passPh;
+    btnLogin.innerText = t.login;
+    noAcc.innerText = t.noAcc;
+    signupText.innerText = t.signup;
+}
+
+languageSelect.onchange = applyLang;
+applyLang();
+</script>
+
+<!-- ---------- TALKBACK SCRIPT ---------- -->
+<script>
+(function(){
+    const audioFiles = { ml:"login_ml.mp3", en:"login_en.mp3" };
+    const segments = { phone:[0,4], pass:[4,8], next:[8,13] };
+
+    const audio = new Audio();
+    let stopAt = 0;
+
+    function play(key){
+        const file = audioFiles[languageSelect.value];
+        audio.src = file;
+        audio.currentTime = segments[key][0];
+        stopAt = segments[key][1];
+        audio.play().catch(()=>{
+            document.body.onclick = () => play(key);
+        });
+    }
+
+    audio.ontimeupdate = () => {
+        if(audio.currentTime >= stopAt) audio.pause();
+    };
+
+    window.addEventListener("load", () => play("phone"));
+    phone.onfocus = () => play("phone");
+    password.onfocus = () => play("pass");
+    btnLogin.onfocus = () => play("next");
+    languageSelect.onchange = () => play("phone");
+})();
+</script>
+
+<!-- ---------- FIREBASE LOGIN (UNCHANGED) ---------- -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA9Q1-_604mrZ4XeddMz2n0S5umTuLLuic",
+    authDomain: "login-6e27a.firebaseapp.com",
+    projectId: "login-6e27a"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+
+window.loginUser = function(e){
+    e.preventDefault();
+    const email = `${phone.value}@krishimitra-app.com`;
+    signInWithEmailAndPassword(auth, email, password.value)
+        .then(()=>location.href="sih2.html")
+        .catch(err=>alert(err.message));
+}
+</script>
+
+</body>
+</html>
